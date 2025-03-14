@@ -11,6 +11,11 @@ const eventroute = require("./Routers/eventrouter");
 const app = express();
 dotenv.config();
 
+//! Home
+app.use("/" , (req,res) => {
+    res.send("<h1> This is an hackathon event page");
+})
+
 mongoose.connect(process.env.MONGO_URI)
    .then(() => console.log("MONGO DB Successfully Connected ✅"))
    .catch((error) => console.log(error));
@@ -21,7 +26,7 @@ app.use("/", userroute); //* USER ROUTE
 app.use("/event" , eventroute); //* Event router
 app.use('/uploads' , express.static('uploads')); //* Serves images 
 
-const PORT = 5000;
+const PORT =process.env.PORT || 5000;
 app.listen(PORT , () => {
     console.log(`App listening on port : ${PORT}`);
 })
