@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
 const path = require("path");
+const cors = require("cors");
 
 //!Routing
 const userroute = require("./Routers/userroute");
@@ -10,6 +11,7 @@ const eventroute = require("./Routers/eventrouter");
 
 const app = express();
 dotenv.config();
+app.use(cors());
 
 //! Home
 app.use("/" , (req,res) => {
@@ -26,7 +28,7 @@ app.use("/", userroute); //* USER ROUTE
 app.use("/event" , eventroute); //* Event router
 app.use('/uploads' , express.static('uploads')); //* Serves images 
 
-const PORT =process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT , () => {
     console.log(`App listening on port : ${PORT}`);
 })
