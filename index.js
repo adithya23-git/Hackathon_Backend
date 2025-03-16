@@ -9,14 +9,13 @@ const cors = require("cors");
 const userroute = require("./Routers/userroute");
 const eventroute = require("./Routers/eventrouter");
 
+const PORT = process.env.PORT || 5000;
+
 const app = express();
 dotenv.config();
 app.use(cors());
 
-//! Home
-app.use("/" , (req,res) => {
-    res.send("<h1> This is an hackathon event page");
-})
+
 
 mongoose.connect(process.env.MONGO_URI)
    .then(() => console.log("MONGO DB Successfully Connected ✅"))
@@ -24,11 +23,11 @@ mongoose.connect(process.env.MONGO_URI)
 
 //!Middlewares
 app.use(bodyParser.json()); //^ Used for converting data into js object
-app.use("/", userroute); //* USER ROUTE
+app.use("/user", userroute); //* USER ROUTE
 app.use("/event" , eventroute); //* Event router
 app.use('/uploads' , express.static('uploads')); //* Serves images 
 
-const PORT = process.env.PORT || 5000;
+
 app.listen(PORT , () => {
     console.log(`App listening on port : ${PORT}`);
 })

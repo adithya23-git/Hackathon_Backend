@@ -8,7 +8,7 @@ dotenv.config();
 
 //!REGISTER USER 
 exports.registeruser = async(req,res) => {
-     const {fname,lname,role,email,password,confirmpassword} = req.body;
+     const {firstname,lastname,role,email,password,confirmpassword} = req.body;
      console.log(password , confirmpassword);
      try{
     //^ Check Mail
@@ -29,8 +29,8 @@ exports.registeruser = async(req,res) => {
      //^Hash password
      const hashedpassword =await bcrypt.hash(password,10);
      const newuser = new user({
-        fname,
-        lname,
+        fname : firstname,
+        lname : lastname,
         role,
         email,
         password : hashedpassword,
